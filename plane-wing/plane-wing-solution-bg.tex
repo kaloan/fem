@@ -1,0 +1,151 @@
+% Meta
+\documentclass[12pt]{article}
+\usepackage[
+	a4paper, 
+	includeheadfoot, 
+	margin = 1.5cm]
+{geometry}
+
+% Hyperlinks
+\usepackage[
+	unicode=true, 
+	colorlinks=true, 
+	linkcolor=black, 
+	urlcolor=black]
+{hyperref}
+
+% Fonts
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[bulgarian]{babel}
+\usepackage{csquotes}
+\usepackage{bm}
+% ISO-Math (only for XeLaTeX and LuaLaTex)
+%\usepackage[math-style=ISO]{unicode-math}
+
+% Indent first line in paragraph
+\usepackage{indentfirst}
+
+% Place tags on the left
+\usepackage[leqno]{amsmath}
+
+% Better math
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{comment}
+\usepackage{mathptmx}
+\usepackage[makeroom]{cancel}
+
+% Create math pictures
+\usepackage{tikz}
+\usepackage{enumitem}
+
+% Better theorems
+\usepackage{amsthm}
+
+% Derivative notations
+\usepackage{physics}
+\usepackage{derivative}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Lapacian delta
+%\newcommand{\laplace}{\increment}
+\newcommand{\laplace}{∆}
+%\fontsize{16pt}{20pt}\selectfont
+% Bolded cyrilic text
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\rmdefault}{cmr}
+\renewcommand{\ttdefault}{cmt}
+
+% Roman numerals for sections
+\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+% Sectioning titles
+\newtheorem{definition}{Дефиниция}[section]
+\newtheorem{problem}{Задача}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{theorem*}{Теорема}
+\newtheorem{lemma}{Лема}
+\newtheorem*{solution*}{Решение}
+
+% Numbering of equations
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Space between lines in array for fractions
+\renewcommand{\arraystretch}{1.5}
+
+\title{Решение на стационарна задача със самолетно крило}
+
+\author{Калоян Стоилов}
+
+\begin{document}
+
+\maketitle
+\begin{large}
+\begin{equation}
+\tag{D}
+    \begin{cases}
+      - \Delta \Phi = 0, \quad \text{в $\Omega$} \\
+      n \cdot \grad \Phi \mid_{\Gamma_{in}} = 1 \\
+      u\mid_{\Gamma_{out}} = 0 \\
+      n \cdot \grad \Phi \mid_{\Gamma_{else}} = 0 \\
+    \end{cases}
+\end{equation}
+
+За да достигнем до вариационна формулировка, умножаваме скаларно двете страни по функция $v$ и прилагаме формула за интегриране по части:
+\begin{align*}
+-\iint\limits_{\Omega} v \Delta \Phi \,\dd\Omega &= 0 \\
+-\iint\limits_{\Omega} v \left(\div \grad \Phi \right) \,\dd\Omega &= 0 \\
+\iint\limits_{\Omega} \grad v \cdot \grad \Phi \,\dd\Omega\, - \int\limits_{\partial\Omega} \left(n \cdot \grad \Phi \right) v \,\dd s &= 0 \\
+\iint\limits_{\Omega} \grad v \cdot \grad \Phi \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{in}} \cancelto{1}{\left(n \cdot \grad \Phi \right)} v \,\dd s + \int\limits_{\Gamma_{out}} \left(n \cdot \grad \Phi \right) v \,\dd s + \int\limits_{\Gamma_{else}} \cancelto{0}{\left(n \cdot \grad \Phi \right)} v \,\dd s \\
+\iint\limits_{\Omega} \grad v \cdot \grad \Phi \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{in}} v \,\dd s + \int\limits_{\Gamma_{out}} \left(n \cdot \grad \Phi \right) \cancelto{0}{v} \,\dd s \\
+\iint\limits_{\Omega} \grad v \cdot \grad \Phi \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{in}} v \,\dd s \\
+\end{align*}
+За да подсигурим последното съкращаване, ще е необходимо: 
+\[v \in V = \{v \in H^1(\Omega) \enspace\vert\enspace v\mid_{\Gamma_{out}}=0\}\]
+Така достигнахме до вариационната задача:
+\begin{align*}
+\tag{V}
+&\text{Търсим $\Phi \in V$, такава че: \enspace}
+\forall v \in V \left(a(\Phi, v)=F(v)\right) \\
+&a(\Phi, v) = \iint\limits_{\Omega} \grad v \cdot \grad \Phi \,\dd\Omega, \quad
+F(v) = \int\limits_{\Gamma_{in}} v \,\dd s
+\end{align*}
+
+Билинейната форма за задачата ни е скаларно произведение и съответно може да приложим цялата теория. Задачата на Риц-Гальоркин е: 
+\begin{align*}
+\tag{R-G}
+&\text{Търсим $\Phi_h \in V_h(\mathcal{K})$, такава че: \enspace}
+\forall v \in V_h(\mathcal{K}) \left(a(\Phi_h, v)=F(v)\right)
+\end{align*}
+
+След стандартните разписвания имаме: 
+\begin{align*}
+	&M^1\mathbf{q}=\mathbf{b} \\
+	&M^1=\begin{pmatrix}
+	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \\
+	\end{pmatrix}, \quad
+    \mathbf{b}=
+    \begin{pmatrix}
+      \int\limits_{\Gamma_{in}} \varphi_1 \,\dd s \\
+      \hdots \\
+      \int\limits_{\Gamma_{in}} \varphi_n \,\dd s \\
+    \end{pmatrix}
+\end{align*}
+$M^1$ е сметната като по лекции. В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. Тогава директно може да се пресметне интеграла, който е лицето на стандартния триъгълник. За $\mathbf{b}$ правим следното наблюдение - ако $i$ и $j$ са съседни възли по $\Gamma_{out}$, то отсечката $l$ от $\mathbf{r}_i=(x_i,y_i)^T$ до $\mathbf{r}_j=(x_j,y_j)^T$ е в $supp \,\varphi_i$ и $supp \,\varphi_j$. Нека разгледаме какво правим за $\varphi_i$:
+\begin{align*}
+&[0,1] \rightarrow (x,y)^T, \quad (x,y)^T \in l \\
+&x(t) = t x_i + (1-t) x_j, \quad y(t) = t y_i + (1-t) y_j \\
+&\dv{x}{t}\left(t\right) = x_i - x_j, \quad \dv{y}{t} \left(t\right) = y_i - y_j \\
+&\int\limits_{l} \varphi_i \,\dd s = \int\limits_{0}^1 (1-t) \sqrt{\left(\dv{x}{t}\right)^2+\left(\dv{y}{t}\right)^2} \,\dd t = \norm{\mathbf{r}_i-\mathbf{r}_j}\int\limits_{0}^1 (1-t) \,\dd t \\ 
+&= \norm{\mathbf{r}_i-\mathbf{r}_j}(1-\frac{1}{2}) =\frac{\norm{\mathbf{r}_i-\mathbf{r}_j}}{2} \\
+\end{align*}
+За получаването на $\int\limits_{\Gamma_{in}} \varphi_i \,\dd s$ остава само да съберем тези изрази за всички гранични отсечки, на които възела $i$ е край.
+\end{large}
+\end{document}
