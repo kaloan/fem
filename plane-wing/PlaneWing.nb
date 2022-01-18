@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     50432,       1129]
-NotebookOptionsPosition[     49767,       1110]
-NotebookOutlinePosition[     50145,       1126]
-CellTagsIndexPosition[     50102,       1123]
+NotebookDataLength[     48216,       1068]
+NotebookOptionsPosition[     47551,       1049]
+NotebookOutlinePosition[     47929,       1065]
+CellTagsIndexPosition[     47886,       1062]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -962,69 +962,7 @@ Cell[BoxData[
        RowBox[{
        "load", "\[LeftDoubleBracket]", "nullNodes", "\[RightDoubleBracket]"}],
         "=", "0"}], ";", "\[IndentingNewLine]", "load"}], 
-     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{"loadVector", "=", 
-      RowBox[{"Table", "[", 
-       RowBox[{"0", ",", 
-        RowBox[{"Length", "@", "nodes"}]}], "]"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"For", "[", 
-      RowBox[{
-       RowBox[{"k", "=", "1"}], ",", 
-       RowBox[{"k", "\[LessEqual]", 
-        RowBox[{"Length", "@", "inElems"}]}], ",", 
-       RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"i", ",", "j"}], "}"}], "=", 
-         RowBox[{
-         "inElems", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}]}], 
-        ";", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-         "loadVector", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
-          "+=", 
-         RowBox[{"0.5", 
-          RowBox[{"Norm", "[", 
-           RowBox[{
-            RowBox[{
-            "nodes", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
-            "-", 
-            RowBox[{
-            "nodes", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}]}],
-            "]"}]}]}], ";", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-         "loadVector", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}],
-          "+=", 
-         RowBox[{"0.5", 
-          RowBox[{"Norm", "[", 
-           RowBox[{
-            RowBox[{
-            "nodes", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
-            "-", 
-            RowBox[{
-            "nodes", "\[LeftDoubleBracket]", "j", "\[RightDoubleBracket]"}]}],
-            "]"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"For", "[", 
-      RowBox[{
-       RowBox[{"k", "=", "1"}], ",", 
-       RowBox[{"k", "\[LessEqual]", 
-        RowBox[{"Length", "@", "outNodes"}]}], ",", 
-       RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"loadVector", "\[LeftDoubleBracket]", 
-          RowBox[{
-          "outNodes", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
-          "\[RightDoubleBracket]"}], "=", "0"}], ";"}]}], 
-      "\[IndentingNewLine]", "]"}], ";"}], "*)"}], 
-   "\[IndentingNewLine]"}]}]], "Input",
+     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{
   3.8513538732391605`*^9, {3.8513540875708075`*^9, 3.8513541178907423`*^9}, {
    3.851354496786192*^9, 3.851354512521639*^9}, {3.851354590289461*^9, 
@@ -1074,7 +1012,8 @@ Cell[BoxData[
    3.851521929202549*^9, 3.8515219372754946`*^9}, {3.8515220073147135`*^9, 
    3.8515220083061457`*^9}, {3.8515228178451166`*^9, 
    3.8515228190853586`*^9}, {3.8515229940423517`*^9, 
-   3.8515229951543627`*^9}},ExpressionUUID->"15d0eed1-086e-4e24-98d7-\
+   3.8515229951543627`*^9}, {3.8515235449507756`*^9, 
+   3.8515235454781027`*^9}},ExpressionUUID->"15d0eed1-086e-4e24-98d7-\
 d32993fff904"],
 
 Cell[BoxData[{
@@ -1129,8 +1068,8 @@ Cell[CellGroupData[{
 Cell[580, 22, 10314, 292, 1128, "Input",ExpressionUUID->"faf02619-938a-47c8-af8c-e4216e0273d5"],
 Cell[10897, 316, 16223, 268, 388, "Output",ExpressionUUID->"d517694f-a930-4154-bf6d-28acd63595f6"]
 }, Open  ]],
-Cell[27135, 587, 21313, 490, 2871, "Input",ExpressionUUID->"15d0eed1-086e-4e24-98d7-d32993fff904"],
-Cell[48451, 1079, 1312, 29, 152, "Input",ExpressionUUID->"1cf30aa1-b430-4dc3-808d-7317dc2acbef"]
+Cell[27135, 587, 19097, 429, 2464, "Input",ExpressionUUID->"15d0eed1-086e-4e24-98d7-d32993fff904"],
+Cell[46235, 1018, 1312, 29, 152, "Input",ExpressionUUID->"1cf30aa1-b430-4dc3-808d-7317dc2acbef"]
 }
 ]
 *)
