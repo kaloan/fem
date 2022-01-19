@@ -103,10 +103,11 @@ $} \\
 \int\limits_{\Gamma_{N}} \cancelto{0}{\left(n \cdot \grad u \right)} v \,\dd s + \int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) v \,\dd s \\
 \iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 
 \int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) \cancelto{0}{v} \,\dd s \\
-\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 0
 \end{align*}
 За да подсигурим последното съкращаване, ще е необходимо: 
 \[v \in V = \{v \in H^1(\Omega) \enspace\vert\enspace v\mid_{\Gamma_{D}}=0\}\]
+За момента ще смятаме все едно ГУ по $\Gamma_{D}$ е хомогенно, а накрая ще вземем предвид, че не е.
 Така достигнахме до вариационната задача:
 \begin{align*}
 \tag{V}
@@ -163,12 +164,13 @@ $M^0$ е силно разредена и ще приближим $(M^0)^{-1}$ �
 &\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{\tau}{2}  (M^0)^{-1} M^1 \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
 &\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
 &\mathbf{P}_{j + 1} = \mathbf{P}_j -2 A \left(I + A \right)^{-1} \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
-&\mathbf{P}_{j + 1} = \left(I -2 A \left(I + A \right)^{-1}\right) \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
+&\mathbf{P}_{j + 1} = \left(I -2 A \left(I + A \right)^{-1}\right) \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j
 \end{align*}
 Ако въведем означанията:
-\begin{equation}
-B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \quad E = C B, \quad F = -\frac{2}{\tau} A - \frac{2}{\tau} A E, \quad G = \tau C \\  
-\end{equation}
+\begin{align*}
+&B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \\
+&E = C B, \quad F = -\frac{2}{\tau} A - \frac{2}{\tau} A E, \quad G = \tau C  
+\end{align*}
 Получаваме директната рекурентна зависимост:
 \begin{equation}
 	\begin{cases}
@@ -177,6 +179,6 @@ B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \quad E = C B, \quad F =
       \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
     \end{cases}
 \end{equation}
-Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно. Затова тук след всяка стъпка пресмятания, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съотвестващи на възлите по границата $\Gamma_{D}$ да са $\sin(8\pi t_{j+1})$
+Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно. Затова тук след всяка стъпка пресмятания, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съотвестващи на възлите по границата $\Gamma_{D}$ да са $\sin(8\pi t_{j+1})$. За намирането на $C$ може отново да концентрираме $I + A$.
 \end{large}
 \end{document}
