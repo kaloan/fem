@@ -139,11 +139,44 @@ $} \\
 \end{align*}
 $M^0, M^1$ са сметнати като по лекции. В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник. Нормализираната система изглежда така:
 \begin{equation}
-\tag{D}
     \begin{cases}
       \dot {\mathbf{q}} = {\mathbf{p}} \\
       \dot {\mathbf{p}} = -(M^0)^{-1} M^1 {\mathbf{q}} \\
+      \mathbf{q}(0) = \mathbf{p}(0) = 0 \\
     \end{cases}
 \end{equation}
+$M^0$ е силно разредена и ще приближим $(M^0)^{-1}$ с $(\bar{M}^0)^{-1}$, където с $\bar{M}^0$ сме означили концентрираната матрица, съотвестваща на $M^0$. За решаване с подобреният метод на Ойлер, то:
+\begin{equation}
+    \begin{cases}
+      \mathbf{Q}_{j + 1} - \mathbf{Q}_j = \frac{\tau}{2} \left( \mathbf{P}_{j + 1} + \mathbf{P}_j \right) \\
+      \mathbf{P}_{j + 1} - \mathbf{P}_j = -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+\end{equation}
+За да се освободим от неявните пресмятания, може да направим следното:
+\begin{align*}
+&\mathbf{Q}_{j + 1} = \mathbf{Q}_j + \frac{\tau}{2} \left( 2\mathbf{P}_j -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \right) \\
+&\mathbf{Q}_{j + 1} + \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_{j+1} = \mathbf{Q}_j - \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_j + \frac{\tau}{2} 2\mathbf{P}_j \\
+&\left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)\mathbf{Q}_{j + 1} = \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j, \quad A = \frac{\tau^2}{4} (M^0)^{-1} M^1 \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{\tau}{2}  (M^0)^{-1} M^1 \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -2 A \left(I + A \right)^{-1} \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
+&\mathbf{P}_{j + 1} = \left(I -2 A \left(I + A \right)^{-1}\right) \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
+\end{align*}
+Ако въведем означанията:
+\begin{equation}
+B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \quad E = C B, \quad F = -\frac{2}{\tau} A - \frac{2}{\tau} A E, \quad G = \tau C \\  
+\end{equation}
+Получаваме директната рекурентна зависимост:
+\begin{equation}
+	\begin{cases}
+      \mathbf{Q}_{j + 1} = E\mathbf{Q}_j + G\mathbf{P}_j \\
+      \mathbf{P}_{j + 1} = D\mathbf{P}_j + F\mathbf{Q}_j \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+\end{equation}
+Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно. Затова тук след всяка стъпка пресмятания, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съотвестващи на възлите по границата $\Gamma_{D}$ да са $\sin(8\pi t_{j+1})$
 \end{large}
 \end{document}
