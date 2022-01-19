@@ -1,0 +1,149 @@
+% Meta
+\documentclass[12pt]{article}
+\usepackage[
+	a4paper, 
+	includeheadfoot, 
+	margin = 1.5cm]
+{geometry}
+
+% Hyperlinks
+\usepackage[
+	unicode=true, 
+	colorlinks=true, 
+	linkcolor=black, 
+	urlcolor=black]
+{hyperref}
+
+% Fonts
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[bulgarian]{babel}
+\usepackage{csquotes}
+\usepackage{bm}
+% ISO-Math (only for XeLaTeX and LuaLaTex)
+%\usepackage[math-style=ISO]{unicode-math}
+
+% Indent first line in paragraph
+\usepackage{indentfirst}
+
+% Place tags on the left
+\usepackage[leqno]{amsmath}
+
+% Better math
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{comment}
+\usepackage{mathptmx}
+\usepackage[makeroom]{cancel}
+
+% Create math pictures
+\usepackage{tikz}
+\usepackage{enumitem}
+
+% Better theorems
+\usepackage{amsthm}
+
+% Derivative notations
+\usepackage{physics}
+\usepackage{derivative}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Lapacian delta
+%\newcommand{\laplace}{\increment}
+\newcommand{\laplace}{∆}
+%\fontsize{16pt}{20pt}\selectfont
+% Bolded cyrilic text
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\rmdefault}{cmr}
+\renewcommand{\ttdefault}{cmt}
+
+% Roman numerals for sections
+\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+% Sectioning titles
+\newtheorem{definition}{Дефиниция}[section]
+\newtheorem{problem}{Задача}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{theorem*}{Теорема}
+\newtheorem{lemma}{Лема}
+\newtheorem*{solution*}{Решение}
+
+% Numbering of equations
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Space between lines in array for fractions
+\renewcommand{\arraystretch}{1.5}
+
+\title{Решение на стационарна задача със самолетно крило}
+
+\author{Калоян Стоилов}
+
+\begin{document}
+
+\maketitle
+\begin{large}
+\begin{equation}
+\tag{D}
+    \begin{cases}
+      \ddot u - \Delta u = 0, \quad \text{в $\Omega \times J
+$} \\
+      n \cdot \grad u \mid_{\Gamma_{N} \times J} = 0 \\
+      u\mid_{\Gamma_{D} \times J} = 0.1 \sin (8\pi t) \\
+      u = \dot u = 0, \text{в $\Omega$ при $t=0$} 
+    \end{cases}
+\end{equation}
+
+За да достигнем до вариационна формулировка, нека разгледаме за фиксиран момент $t \in J$ и умножим скаларно двете страни по функция $v$ и приложим формула за интегриране по части:
+\begin{align*}
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega -\iint\limits_{\Omega} v \Delta u \,\dd\Omega &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega -\iint\limits_{\Omega} v \left(\div \grad u \right) \,\dd\Omega &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\, - \int\limits_{\partial\Omega} \left(n \cdot \grad u \right) v \,\dd s &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{N}} \cancelto{0}{\left(n \cdot \grad u \right)} v \,\dd s + \int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) v \,\dd s \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) \cancelto{0}{v} \,\dd s \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 0 \\
+\end{align*}
+За да подсигурим последното съкращаване, ще е необходимо: 
+\[v \in V = \{v \in H^1(\Omega) \enspace\vert\enspace v\mid_{\Gamma_{D}}=0\}\]
+Така достигнахме до вариационната задача:
+\begin{align*}
+\tag{V}
+&\text{За всяко $t \in J$ търсим $u \in V$, такава че: \enspace} \\
+&\forall v \in V \left(\dv[2]{t} \iint\limits_{\Omega} v u \,\dd\Omega + a(u, v)=0\right) \\
+&a(u, v) = \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega
+\end{align*}
+
+Билинейната форма за задачата ни е скаларно произведение и съответно може да приложим цялата теория. Задачата на Риц-Гальоркин е: 
+\begin{align*}
+\tag{R-G}
+&\text{За всяко $t \in J$ търсим $u_h \in V_h(\mathcal{K})$, такава че: \enspace} \\
+&\forall v \in V_h(\mathcal{K}) \left(\dv[2]{t} \iint\limits_{\Omega} v u_h \,\dd\Omega + a(u_h, v) = 0\right)
+\end{align*}
+
+След стандартните разписвания имаме: 
+\begin{align*}
+	&\dv[2]{t} M^0\mathbf{q} + M^1\mathbf{q} = 0 \\
+	&M^0\dv[2]{\mathbf{q}}{t} + M^1\mathbf{q} = 0 \\
+	&M^0=\begin{pmatrix}
+	\iint\limits_{\Omega} \varphi_1 \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \varphi_n \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n \\
+	\end{pmatrix}, \quad
+	M^1=\begin{pmatrix}
+	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \\
+	\end{pmatrix}
+\end{align*}
+$M^0, M^1$ са сметнати като по лекции. В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник. Нормализираната система изглежда така:
+\begin{equation}
+\tag{D}
+    \begin{cases}
+      \dot {\mathbf{q}} = {\mathbf{p}} \\
+      \dot {\mathbf{p}} = -(M^0)^{-1} M^1 {\mathbf{q}} \\
+    \end{cases}
+\end{equation}
+\end{large}
+\end{document}
