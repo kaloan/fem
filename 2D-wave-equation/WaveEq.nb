@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     35396,        827]
-NotebookOptionsPosition[     34738,        808]
-NotebookOutlinePosition[     35114,        824]
-CellTagsIndexPosition[     35071,        821]
+NotebookDataLength[     30017,        693]
+NotebookOptionsPosition[     29359,        674]
+NotebookOutlinePosition[     29735,        690]
+CellTagsIndexPosition[     29692,        687]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -352,90 +352,53 @@ Cell[BoxData[
      "by", " ", "using", " ", "the", " ", "list"}], " ", "*)"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"J", "[", 
-     RowBox[{"nodes_", ",", "element_"}], "]"}], ":=", 
+    RowBox[{"J", "[", "elementNodes_", "]"}], ":=", 
     RowBox[{"{", "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{
-       RowBox[{"nodes", "\[LeftDoubleBracket]", 
-        RowBox[{
-        "element", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
-        "\[RightDoubleBracket]"}], "-", 
-       RowBox[{"nodes", "\[LeftDoubleBracket]", 
-        RowBox[{
-        "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+       RowBox[{
+       "elementNodes", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+        "-", 
+       RowBox[{
+       "elementNodes", "\[LeftDoubleBracket]", "1", 
         "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"nodes", "\[LeftDoubleBracket]", 
-        RowBox[{
-        "element", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
-        "\[RightDoubleBracket]"}], "-", 
-       RowBox[{"nodes", "\[LeftDoubleBracket]", 
-        RowBox[{
-        "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+       RowBox[{
+       "elementNodes", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}],
+        "-", 
+       RowBox[{
+       "elementNodes", "\[LeftDoubleBracket]", "1", 
         "\[RightDoubleBracket]"}]}]}], "}"}]}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"B", "[", 
-     RowBox[{"nodes_", ",", "element_"}], "]"}], ":=", 
+    RowBox[{"B", "[", "elementNodes_", "]"}], ":=", 
     RowBox[{"{", "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
-          "\[RightDoubleBracket]"}], "-", 
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
-          "\[RightDoubleBracket]"}]}], ",", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"3", ",", "2"}], "\[RightDoubleBracket]"}], "-", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"1", ",", "2"}], "\[RightDoubleBracket]"}]}], ",", 
         RowBox[{
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
-          "\[RightDoubleBracket]"}], "-", 
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
-          "\[RightDoubleBracket]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"1", ",", "2"}], "\[RightDoubleBracket]"}], "-", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"2", ",", "2"}], "\[RightDoubleBracket]"}]}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
-          "\[RightDoubleBracket]"}], "-", 
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
-          "\[RightDoubleBracket]"}]}], ",", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}], "-", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"3", ",", "1"}], "\[RightDoubleBracket]"}]}], ",", 
         RowBox[{
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
-          "\[RightDoubleBracket]"}], "-", 
-         RowBox[{
-          RowBox[{"nodes", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "element", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-           "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
-          "\[RightDoubleBracket]"}]}]}], "}"}]}], "}"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"2", ",", "1"}], "\[RightDoubleBracket]"}], "-", 
+         RowBox[{"elementNodes", "\[LeftDoubleBracket]", 
+          RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}]}]}], "}"}]}], 
+     "}"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"The", " ", "local", " ", "stiffness", " ", "matrix"}], " ", 
     "*)"}], "\[IndentingNewLine]", 
@@ -478,33 +441,138 @@ Cell[BoxData[
      RowBox[{"which", " ", "is", " ", 
       FractionBox["1", "2"]}]}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"localStiffness", "[", 
-     RowBox[{"nodes_", ",", " ", "element_"}], "]"}], ":=", 
+    RowBox[{"localStiffness", "[", "elementNodes_", "]"}], ":=", 
     "\[IndentingNewLine]", 
     RowBox[{
      FractionBox["0.5", 
       RowBox[{"Det", "@", 
-       RowBox[{"J", "[", 
-        RowBox[{"nodes", ",", "element"}], "]"}]}]], 
+       RowBox[{"J", "[", "elementNodes", "]"}]}]], 
      RowBox[{"grad\[Psi]T", ".", 
       RowBox[{"Transpose", "@", 
-       RowBox[{"B", "[", 
-        RowBox[{"nodes", ",", "element"}], "]"}]}], ".", 
-      RowBox[{"B", "[", 
-       RowBox[{"nodes", ",", "element"}], "]"}], ".", "grad\[Psi]"}]}]}], 
+       RowBox[{"B", "[", "elementNodes", "]"}]}], ".", 
+      RowBox[{"B", "[", "elementNodes", "]"}], ".", "grad\[Psi]"}]}]}], 
    "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
     "Same", " ", "comments", " ", "apply", " ", "to", " ", "localMass"}], " ",
      "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"localMass", "[", 
-     RowBox[{"nodes_", ",", " ", "element_"}], "]"}], ":=", 
+    RowBox[{"localMass", "[", "elementNodes_", "]"}], ":=", 
     RowBox[{"0.5", 
      RowBox[{"Det", "@", 
-      RowBox[{"J", "[", 
-       RowBox[{"nodes", ",", "element"}], "]"}]}], 
+      RowBox[{"J", "[", "elementNodes", "]"}]}], 
      RowBox[{"grad\[Psi]T", ".", "grad\[Psi]"}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FEMMatrix", "[", 
+     RowBox[{
+     "nodes_", ",", "elements_", ",", "localFunction_", ",", "nullNodes_"}], 
+     "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"globalMatrix", " ", "=", " ", 
+         RowBox[{"ConstantArray", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Length", "@", "nodes"}], ",", 
+             RowBox[{"Length", "@", "nodes"}]}], "}"}]}], "]"}]}], ",", " ", 
+        "element", ",", " ", "stiffness"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"k", "=", "1"}], ",", 
+         RowBox[{"k", "\[LessEqual]", 
+          RowBox[{"Length", "@", "elements"}]}], ",", 
+         RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"element", " ", "=", " ", 
+           RowBox[{
+           "elements", "\[LeftDoubleBracket]", "k", 
+            "\[RightDoubleBracket]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"stiffness", "=", 
+           RowBox[{"localFunction", "@", 
+            RowBox[{
+            "nodes", "\[LeftDoubleBracket]", "element", 
+             "\[RightDoubleBracket]"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"i", "=", "1"}], ",", 
+            RowBox[{"i", "\[LessEqual]", "3"}], ",", 
+            RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"For", "[", 
+              RowBox[{
+               RowBox[{"j", "=", "1"}], ",", 
+               RowBox[{"j", "\[LessEqual]", "3"}], ",", 
+               RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                   RowBox[{
+                   "element", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                   RowBox[{
+                   "element", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "+=", 
+                 RowBox[{"stiffness", "\[LeftDoubleBracket]", 
+                  RowBox[{"i", ",", " ", "j"}], "\[RightDoubleBracket]"}]}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+           "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+        "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "We", " ", "should", " ", "now", " ", "take", " ", "into", " ", 
+          "account", " ", "that", " ", "some", " ", "of", " ", "the", " ", 
+          "coefficients", " ", "will", " ", "have", " ", "to", " ", "be", " ",
+           "0", " ", "to", " ", "ensure", " ", "the", " ", "boundary", " ", 
+          "condition", " ", "of", " ", "u"}], "=", "0"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", 
+          RowBox[{"Length", "@", "nullNodes"}]}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"j", "=", "1"}], ",", 
+            RowBox[{"j", "\[LessEqual]", 
+             RowBox[{"Length", "@", "nodes"}]}], ",", 
+            RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
+               RowBox[{"j", ",", 
+                RowBox[{
+                "nullNodes", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
+              "0"}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
+               RowBox[{
+                RowBox[{
+                "nullNodes", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}], ",", "j"}], 
+               "\[RightDoubleBracket]"}], "=", "0"}], ";"}]}], 
+           "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
+            RowBox[{
+             RowBox[{
+             "nullNodes", "\[LeftDoubleBracket]", "i", 
+              "\[RightDoubleBracket]"}], ",", 
+             RowBox[{
+             "nullNodes", "\[LeftDoubleBracket]", "i", 
+              "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
+           "1"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "globalMatrix"}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
@@ -513,113 +581,11 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"stiffnessMatrix", "[", 
-     RowBox[{"nodes_", ",", "elements_"}], "]"}], ":=", 
-    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"nodes_", ",", "elements_", ",", "nullNodes_"}], "]"}], ":=", 
+    RowBox[{"FEMMatrix", "[", 
      RowBox[{
-      RowBox[{"globalMatrix", " ", "=", " ", 
-       RowBox[{"ConstantArray", "[", 
-        RowBox[{"0", ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"Length", "@", "nodes"}], ",", 
-           RowBox[{"Length", "@", "nodes"}]}], "}"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"For", "[", 
-       RowBox[{
-        RowBox[{"k", "=", "1"}], ",", 
-        RowBox[{"k", "\[LessEqual]", 
-         RowBox[{"Length", "[", "elements", "]"}]}], ",", 
-        RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"element", " ", "=", " ", 
-          RowBox[{
-          "elements", "\[LeftDoubleBracket]", "k", 
-           "\[RightDoubleBracket]"}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"stiffness", "=", 
-          RowBox[{"localStiffness", "[", 
-           RowBox[{"nodes", ",", "element"}], "]"}]}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"For", "[", 
-          RowBox[{
-           RowBox[{"i", "=", "1"}], ",", 
-           RowBox[{"i", "\[LessEqual]", "3"}], ",", 
-           RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"For", "[", 
-             RowBox[{
-              RowBox[{"j", "=", "1"}], ",", 
-              RowBox[{"j", "\[LessEqual]", "3"}], ",", 
-              RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-                 RowBox[{
-                  RowBox[{
-                  "element", "\[LeftDoubleBracket]", "i", 
-                   "\[RightDoubleBracket]"}], ",", 
-                  RowBox[{
-                  "element", "\[LeftDoubleBracket]", "j", 
-                   "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "+=", 
-                RowBox[{"stiffness", "\[LeftDoubleBracket]", 
-                 RowBox[{"i", ",", " ", "j"}], "\[RightDoubleBracket]"}]}], 
-               ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
-          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
-       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-        RowBox[{
-        "We", " ", "should", " ", "now", " ", "take", " ", "into", " ", 
-         "account", " ", "that", " ", "some", " ", "of", " ", "the", " ", 
-         "coefficients", " ", "will", " ", "have", " ", "to", " ", "be", " ", 
-         "0", " ", "to", " ", "ensure", " ", "the", " ", "boundary", " ", 
-         "condition", " ", "of", " ", "u"}], "=", "0"}], " ", "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{"For", "[", 
-       RowBox[{
-        RowBox[{"i", "=", "1"}], ",", 
-        RowBox[{"i", "\[LessEqual]", 
-         RowBox[{"Length", "@", "outNodes"}]}], ",", 
-        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "outNodes", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
-            "\[RightDoubleBracket]"}], "=", 
-          RowBox[{"Table", "[", 
-           RowBox[{"0", ",", 
-            RowBox[{"{", 
-             RowBox[{"j", ",", "1", ",", 
-              RowBox[{"Length", "@", "nodes"}]}], "}"}]}], "]"}]}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"For", "[", 
-          RowBox[{
-           RowBox[{"j", "=", "1"}], ",", 
-           RowBox[{"j", "\[LessEqual]", 
-            RowBox[{"Length", "@", "nodes"}]}], ",", 
-           RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-              RowBox[{"j", ",", 
-               RowBox[{
-               "outNodes", "\[LeftDoubleBracket]", "i", 
-                "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
-             "0"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-           RowBox[{
-            RowBox[{
-            "outNodes", "\[LeftDoubleBracket]", "i", 
-             "\[RightDoubleBracket]"}], ",", 
-            RowBox[{
-            "outNodes", "\[LeftDoubleBracket]", "i", 
-             "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
-          "1"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", "globalMatrix"}], 
-     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+     "nodes", ",", "elements", ",", "localStiffness", ",", "nullNodes"}], 
+     "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
     "The", " ", "function", " ", "that", " ", "assebles", " ", "the", " ", 
@@ -627,113 +593,10 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"massMatrix", "[", 
-     RowBox[{"nodes_", ",", "elements_"}], "]"}], ":=", 
-    RowBox[{"(", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"globalMatrix", " ", "=", " ", 
-       RowBox[{"ConstantArray", "[", 
-        RowBox[{"0", ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"Length", "@", "nodes"}], ",", 
-           RowBox[{"Length", "@", "nodes"}]}], "}"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"For", "[", 
-       RowBox[{
-        RowBox[{"k", "=", "1"}], ",", 
-        RowBox[{"k", "\[LessEqual]", 
-         RowBox[{"Length", "[", "elements", "]"}]}], ",", 
-        RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"element", " ", "=", " ", 
-          RowBox[{
-          "elements", "\[LeftDoubleBracket]", "k", 
-           "\[RightDoubleBracket]"}]}], ";", "\[IndentingNewLine]", 
-         RowBox[{"mass", "=", 
-          RowBox[{"localMass", "[", 
-           RowBox[{"nodes", ",", "element"}], "]"}]}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"For", "[", 
-          RowBox[{
-           RowBox[{"i", "=", "1"}], ",", 
-           RowBox[{"i", "\[LessEqual]", "3"}], ",", 
-           RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"For", "[", 
-             RowBox[{
-              RowBox[{"j", "=", "1"}], ",", 
-              RowBox[{"j", "\[LessEqual]", "3"}], ",", 
-              RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-                 RowBox[{
-                  RowBox[{
-                  "element", "\[LeftDoubleBracket]", "i", 
-                   "\[RightDoubleBracket]"}], ",", 
-                  RowBox[{
-                  "element", "\[LeftDoubleBracket]", "j", 
-                   "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "+=", 
-                RowBox[{"mass", "\[LeftDoubleBracket]", 
-                 RowBox[{"i", ",", " ", "j"}], "\[RightDoubleBracket]"}]}], 
-               ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
-          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
-       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-        RowBox[{
-        "We", " ", "should", " ", "now", " ", "take", " ", "into", " ", 
-         "account", " ", "that", " ", "some", " ", "of", " ", "the", " ", 
-         "coefficients", " ", "will", " ", "have", " ", "to", " ", "be", " ", 
-         "0", " ", "to", " ", "ensure", " ", "the", " ", "boundary", " ", 
-         "condition", " ", "of", " ", "u"}], "=", "0"}], " ", "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{"For", "[", 
-       RowBox[{
-        RowBox[{"i", "=", "1"}], ",", 
-        RowBox[{"i", "\[LessEqual]", 
-         RowBox[{"Length", "@", "outNodes"}]}], ",", 
-        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-           RowBox[{
-           "outNodes", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
-            "\[RightDoubleBracket]"}], "=", 
-          RowBox[{"Table", "[", 
-           RowBox[{"0", ",", 
-            RowBox[{"{", 
-             RowBox[{"j", ",", "1", ",", 
-              RowBox[{"Length", "@", "nodes"}]}], "}"}]}], "]"}]}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"For", "[", 
-          RowBox[{
-           RowBox[{"j", "=", "1"}], ",", 
-           RowBox[{"j", "\[LessEqual]", 
-            RowBox[{"Length", "@", "nodes"}]}], ",", 
-           RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-              RowBox[{"j", ",", 
-               RowBox[{
-               "outNodes", "\[LeftDoubleBracket]", "i", 
-                "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
-             "0"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"globalMatrix", "\[LeftDoubleBracket]", 
-           RowBox[{
-            RowBox[{
-            "outNodes", "\[LeftDoubleBracket]", "i", 
-             "\[RightDoubleBracket]"}], ",", 
-            RowBox[{
-            "outNodes", "\[LeftDoubleBracket]", "i", 
-             "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "=", 
-          "1"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", "globalMatrix"}], 
-     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+     RowBox[{"nodes_", ",", "elements_", ",", "nullNodes_"}], "]"}], ":=", 
+    RowBox[{"FEMMatrix", "[", 
+     RowBox[{"nodes", ",", "elements", ",", "localMass", ",", "nullNodes"}], 
+     "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
@@ -762,10 +625,13 @@ Cell[BoxData[
         FractionBox["1", "#"], "&"}], "@*", "Total"}], "/@", "M"}], 
      "]"}]}]}]}]], "Input",
  CellChangeTimes->{{3.8515042704668436`*^9, 3.8515043015359144`*^9}, {
-  3.8515045118012066`*^9, 3.851504544176796*^9}, {3.85150464220185*^9, 
-  3.8515047591045036`*^9}, {3.85150483019942*^9, 3.8515048595088882`*^9}, {
-  3.8515050505430174`*^9, 3.851505070086688*^9}, {3.8515053095021253`*^9, 
-  3.851505325925314*^9}},ExpressionUUID->"692ebac8-8f97-4848-bf00-\
+   3.8515045118012066`*^9, 3.851504544176796*^9}, {3.85150464220185*^9, 
+   3.8515047591045036`*^9}, {3.85150483019942*^9, 3.8515048595088882`*^9}, {
+   3.8515050505430174`*^9, 3.851505070086688*^9}, {3.8515053095021253`*^9, 
+   3.851505325925314*^9}, {3.8518306109658303`*^9, 3.8518307122052813`*^9}, {
+   3.851830804272276*^9, 3.8518308054657717`*^9}, 3.8518308401988306`*^9, {
+   3.8518309748866005`*^9, 3.8518309765759363`*^9}, {3.851831217723798*^9, 
+   3.8518313496757326`*^9}},ExpressionUUID->"692ebac8-8f97-4848-bf00-\
 5120b34d4997"],
 
 Cell[BoxData[
@@ -827,8 +693,8 @@ Cell[CellGroupData[{
 Cell[580, 22, 4094, 116, 561, "Input",ExpressionUUID->"1f7ce902-b318-4329-af86-9e328ef98de9"],
 Cell[4677, 140, 8609, 144, 554, "Output",ExpressionUUID->"35add014-9c47-4a37-95c3-a532ff94d0b4"]
 }, Open  ]],
-Cell[13301, 287, 19906, 481, 2889, "Input",ExpressionUUID->"692ebac8-8f97-4848-bf00-5120b34d4997"],
-Cell[33210, 770, 1524, 36, 464, "Input",ExpressionUUID->"ee3a5a20-0e4a-4d40-8931-3a03ef511b29"]
+Cell[13301, 287, 14527, 347, 2243, "Input",ExpressionUUID->"692ebac8-8f97-4848-bf00-5120b34d4997"],
+Cell[27831, 636, 1524, 36, 464, "Input",ExpressionUUID->"ee3a5a20-0e4a-4d40-8931-3a03ef511b29"]
 }
 ]
 *)
