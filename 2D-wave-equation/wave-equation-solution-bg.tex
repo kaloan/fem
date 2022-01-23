@@ -1,9 +1,9 @@
 % Meta
-\documentclass[12pt]{article}
+\documentclass[bulgarian, 12pt]{article}
 \usepackage[
 	a4paper, 
 	includeheadfoot, 
-	margin = 1.5cm]
+	margin = 1.5 cm]
 {geometry}
 
 % Hyperlinks
@@ -18,10 +18,14 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[bulgarian]{babel}
-\usepackage{csquotes}
 \usepackage{bm}
 % ISO-Math (only for XeLaTeX and LuaLaTex)
 %\usepackage[math-style=ISO]{unicode-math}
+
+% Citing
+% IMPORTANT! USE 'babel=true' to be able to use csquotes with a multitude of languages
+% By default you can use only ~10 languages
+\usepackage[babel=true]{csquotes}
 
 % Indent first line in paragraph
 \usepackage{indentfirst}
@@ -82,6 +86,7 @@
 \begin{document}
 
 \maketitle
+
 \begin{large}
 \begin{equation}
 \tag{D}
@@ -116,7 +121,8 @@ $} \\
 &a(u, v) = \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega
 \end{align*}
 
-Билинейната форма за задачата ни е скаларно произведение и съответно може да приложим цялата теория. Задачата на Риц-Гальоркин е: 
+Билинейната форма за задачата ни е скаларно произведение и съответно може да приложим цялата теория. 
+Задачата на Риц-Гальоркин е: 
 \begin{align*}
 \tag{R-G}
 &\text{За всяко $t \in J$ търсим $u_h \in V_h(\mathcal{K})$, такава че: \enspace} \\
@@ -130,30 +136,68 @@ $} \\
 	&M^0=\begin{pmatrix}
 	\iint\limits_{\Omega} \varphi_1 \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n \,\dd\Omega \\
 	\vdots & \ddots & \vdots \\
-	\iint\limits_{\Omega} \varphi_n \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n \\
-	\end{pmatrix}, \quad
+	\iint\limits_{\Omega} \varphi_n \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n \,\dd\Omega \\
+	\end{pmatrix},
 	M^1=\begin{pmatrix}
 	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
 	\vdots & \ddots & \vdots \\
-	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \,\dd\Omega \\
 	\end{pmatrix}
 \end{align*}
-$M^0, M^1$ са сметнати като по лекции. В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник. Нормализираната система изглежда така:
+
+$M^0, M^1$ са сметнати като по лекции.
+В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. 
+Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник. 
+Нормализираната система изглежда така:
 \begin{equation}
     \begin{cases}
       \dot {\mathbf{q}} = {\mathbf{p}} \\
       \dot {\mathbf{p}} = -(M^0)^{-1} M^1 {\mathbf{q}} \\
       \mathbf{q}(0) = \mathbf{p}(0) = 0 \\
     \end{cases}
+	\iff
+	\begin{cases}
+		\dot{\mathbf{s}} = 
+			\left(\begin{array}{c|c}
+			O & I \\ \hline
+			-(M^0)^{-1} M^1 & O 
+		\end{array}\right) \mathbf{s} = 
+		A \mathbf{s}\\
+		\mathbf{s}(0) = 0 \\
+	\end{cases}, \quad 
+	\mathbf{s} = 
+		\left(\begin{array}{c}
+			\mathbf{Q} \\ \hline
+			\mathbf{P}
+		\end{array}\right)
 \end{equation}
-$M^0$ е силно разредена и ще приближим $(M^0)^{-1}$ с $(\bar{M}^0)^{-1}$, където с $\bar{M}^0$ сме означили концентрираната матрица, съотвестваща на $M^0$. За решаване с подобрения метод на Ойлер, то:
-\begin{equation}
+$M^0$ е силно разредена и ще приближим $(M^0)^{-1}$ с $(\bar{M}^0)^{-1}$, където с $\bar{M}^0$ сме означили концентрираната матрица, съотвестваща на $M^0$. 
+За решаване с подобрения метод на Ойлер, то:
+\begin{comment}
     \begin{cases}
       \mathbf{Q}_{j + 1} - \mathbf{Q}_j = \frac{\tau}{2} \left( \mathbf{P}_{j + 1} + \mathbf{P}_j \right) \\
       \mathbf{P}_{j + 1} - \mathbf{P}_j = -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \\
       \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
     \end{cases}
-\end{equation}
+\end{comment}
+\begin{align*}
+	&\begin{cases}
+		\mathbf{S}_{j+1} - \mathbf{S}_{j} = 
+		\frac{\tau}{2} A \left(\mathbf{S}_{j+1} + \mathbf{S}_{j}\right)  \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \iff
+	\begin{cases}
+		(I - \frac{\tau}{2} A)\mathbf{S}_{j+1} = (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \\
+	& \text{Т.е. получаваме, че} \quad
+	\begin{cases}
+		\mathbf{S}_{j+1} = (I - \frac{\tau}{2} A)^{-1} (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases}
+\end{align*}
+
+\begin{comment}
 За да се освободим от неявните пресмятания, може да направим следното:
 \begin{align*}
 &\mathbf{Q}_{j + 1} = \mathbf{Q}_j + \frac{\tau}{2} \left( 2\mathbf{P}_j -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \right) \\
@@ -193,6 +237,10 @@ $M^0$ е силно разредена и ще приближим $(M^0)^{-1}$ �
 			\mathbf{P}_j
 		\end{array}\right)
 \end{equation}
-Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно. Затова тук след всяка стъпка пресмятания, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съответстващи на възлите по границата $\Gamma_{D}$ да са $0.1\sin(8\pi t_{j+1})$. За намирането на $C$ може отново да концентрираме $I + A$.
+\end{comment}
+Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно.
+Затова тук след всяка стъпка пресмятания, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съответстващи на възлите по границата $\Gamma_{D}$ да са $0.1\sin(8\pi\, t_{j+1})$. 
+За намирането на $(I - \frac{\tau}{2} A)^{-1}$ може отново да концентрираме.
+
 \end{large}
 \end{document}
