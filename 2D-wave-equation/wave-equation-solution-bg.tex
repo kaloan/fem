@@ -1,0 +1,277 @@
+% Meta
+\documentclass[bulgarian, 12pt]{article}
+\usepackage[
+	a4paper, 
+	includeheadfoot, 
+	margin = 1.5 cm]
+{geometry}
+
+% Hyperlinks
+\usepackage[
+	unicode=true, 
+	colorlinks=true, 
+	linkcolor=black, 
+	urlcolor=black]
+{hyperref}
+
+% Fonts
+% UTF-8 if you are not using XeLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{bm}
+% ISO-Math (only for XeLaTeX and LuaLaTex)
+%\usepackage[math-style=ISO]{unicode-math}
+
+% Citing
+% IMPORTANT! USE 'babel=true' to be able to use csquotes with a multitude of languages
+% By default you can use only ~10 languages
+\usepackage[babel=true]{csquotes}
+
+% Indent first line in paragraph
+\usepackage{indentfirst}
+
+% Place tags on the left
+\usepackage[leqno]{amsmath}
+
+% Better math
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{comment}
+\usepackage{mathptmx}
+\usepackage[makeroom]{cancel}
+
+% Create math pictures
+\usepackage{tikz}
+\usepackage{enumitem}
+
+% Better theorems
+\usepackage{amsthm}
+
+% Derivative notations
+\usepackage{physics}
+\usepackage{derivative}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Lapacian delta
+%\newcommand{\laplace}{\increment}
+\newcommand{\laplace}{∆}
+%\fontsize{16pt}{20pt}\selectfont
+% Bolded cyrilic text
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\rmdefault}{cmr}
+\renewcommand{\ttdefault}{cmt}
+
+% Roman numerals for sections
+\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+% Sectioning titles
+\newtheorem{definition}{Дефиниция}[section]
+\newtheorem{problem}{Задача}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{theorem*}{Теорема}
+\newtheorem{lemma}{Лема}
+\newtheorem*{solution*}{Решение}
+
+% Numbering of equations
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Space between lines in array for fractions
+\renewcommand{\arraystretch}{1.5}
+
+\title{Решение на стационарна задача със самолетно крило}
+
+\author{Калоян Стоилов}
+
+\begin{document}
+
+\maketitle
+
+\begin{large}
+\begin{equation}
+\tag{D}
+    \begin{cases}
+      \ddot u - \Delta u = 0, \quad \text{в $\Omega \times J
+$} \\
+      n \cdot \grad u \mid_{\Gamma_{N} \times J} = 0 \\
+      u\mid_{\Gamma_{D} \times J} = 0.1 \sin (8\pi t) \\
+      u = \dot u = 0, \text{в $\Omega$ при $t=0$} 
+    \end{cases}
+\end{equation}
+
+За да достигнем до вариационна формулировка, нека разгледаме за фиксиран момент $t \in J$ и умножим скаларно двете страни по функция $v$ и приложим формула за интегриране по части:
+\begin{align*}
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega -\iint\limits_{\Omega} v \Delta u \,\dd\Omega &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega -\iint\limits_{\Omega} v \left(\div \grad u \right) \,\dd\Omega &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\, - \int\limits_{\partial\Omega} \left(n \cdot \grad u \right) v \,\dd s &= 0 \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{N}} \cancelto{0}{\left(n \cdot \grad u \right)} v \,\dd s + \int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) v \,\dd s \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 
+\int\limits_{\Gamma_{D}} \left(n \cdot \grad u \right) \cancelto{0}{v} \,\dd s \\
+\iint\limits_{\Omega} v \ddot u \,\dd\Omega + \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega\,  &= 0
+\end{align*}
+За да подсигурим последното съкращаване, ще е необходимо: 
+\[v \in V = \{v \in H^1(\Omega) \enspace\vert\enspace v\mid_{\Gamma_{D}}=0\}\]
+За момента ще смятаме все едно ГУ по $\Gamma_{D}$ е хомогенно, а накрая ще вземем предвид, че не е.
+Така достигнахме до вариационната задача:
+\begin{align*}
+\tag{V}
+&\text{За всяко $t \in J$ търсим $u \in V$, такава че: \enspace} \\
+&\forall v \in V \left(\dv[2]{t} \iint\limits_{\Omega} v u \,\dd\Omega + a(u, v)=0\right) \\
+&a(u, v) = \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega
+\end{align*}
+
+Билинейната форма за задачата ни е скаларно произведение и съответно може да приложим цялата теория. 
+Задачата на Риц-Гальоркин е: 
+\begin{align*}
+\tag{R-G}
+&\text{За всяко $t \in J$ търсим $u_h \in V_h(\mathcal{K})$, такава че: \enspace} \\
+&\forall v \in V_h(\mathcal{K}) \left(\dv[2]{t} \iint\limits_{\Omega} v u_h \,\dd\Omega + a(u_h, v) = 0\right)
+\end{align*}
+
+Тук $\mathcal{K}$ е триангулацията. След стандартните разписвания имаме: 
+\begin{align*}
+	&\dv[2]{t} M^0\mathbf{q} + M^1\mathbf{q} = 0,\,\text{т.е.}\quad
+	M^0\ddot{\mathbf{q}} + M^1\mathbf{q} = 0 \\
+	&M^0=\begin{pmatrix}
+	\iint\limits_{\Omega} \varphi_1 \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \varphi_n \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n \,\dd\Omega \\
+	\end{pmatrix},\,
+	M^1=\begin{pmatrix}
+	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \,\dd\Omega \\
+	\end{pmatrix}
+\end{align*}
+
+$M^0, M^1$ са сметнати като по лекции.
+В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. 
+Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник.
+Интегралът за локалните матрици на масата също е константен.
+Нормализираната система изглежда така:
+\begin{comment}
+	\begin{cases}
+		\dot{\mathbf{s}} = 
+			\left(\begin{array}{c|c}
+			O & I \\ \hline
+			-(M^0)^{-1} M^1 & O
+		\end{array}\right) \mathbf{s} = 
+		A \mathbf{s}\\
+		\mathbf{s}(0) = 0 \\
+	\end{cases},
+\end{comment}
+\begin{equation*}
+    \begin{cases}
+      \dot {\mathbf{q}} = {\mathbf{p}} \\
+      (M^0) \dot {\mathbf{p}} = -M^1 {\mathbf{q}} \\
+      \mathbf{q}(0) = \mathbf{p}(0) = 0 \\
+    \end{cases}
+	\iff
+	\begin{cases}
+		\left(\begin{array}{c|c}
+			I & O \\ \hline
+			O & M^0
+		\end{array}\right)\dot{\mathbf{s}} = 
+			\left(\begin{array}{c|c}
+			O & I \\ \hline
+			-M^1 & O
+		\end{array}\right) \mathbf{s} \\
+		\mathbf{s}(0) = 0 \\
+	\end{cases}\iff
+	\begin{cases}
+		L\dot{\mathbf{s}} = 
+		R \mathbf{s} \\
+		\mathbf{s}(0) = 0 \\
+	\end{cases}\, 
+	\mathbf{s} = 
+		\left(\begin{array}{c}
+			\mathbf{Q} \\ \hline
+			\mathbf{P}
+		\end{array}\right)
+\end{equation*} 
+Тук с $I$ означихме единичната, а с $O$ нулевата матрица. За решаване с подобрения метод на Ойлер, то:
+\begin{align*}
+	&\begin{cases}
+		L \left(\mathbf{S}_{j+1} - \mathbf{S}_{j}\right) = 
+		\frac{\tau}{2} R \left(\mathbf{S}_{j+1} + \mathbf{S}_{j}\right)  \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \iff
+	\begin{cases}
+		(L - \frac{\tau}{2} R)\mathbf{S}_{j+1} = (L + \frac{\tau}{2} R) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases}
+\end{align*}
+
+Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно.
+Затова тук на всяка стъпка, след решаване на системата, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съответстващи на възлите по границата $\Gamma_{D}$ да са $0.1\sin(8\pi\, t_{j+1})$. 
+След като сме приключили с пресмятането на всички стъпки, искаме да вземем само първата половина на $\mathbf{S}$, т.к. тя отговаря за $\mathbf{Q}$.
+\begin{comment}
+    \begin{cases}
+      \mathbf{Q}_{j + 1} - \mathbf{Q}_j = \frac{\tau}{2} \left( \mathbf{P}_{j + 1} + \mathbf{P}_j \right) \\
+      \mathbf{P}_{j + 1} - \mathbf{P}_j = -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+\end{comment}
+\begin{comment}
+\begin{align*}
+	&\begin{cases}
+		\mathbf{S}_{j+1} - \mathbf{S}_{j} = 
+		\frac{\tau}{2} A \left(\mathbf{S}_{j+1} + \mathbf{S}_{j}\right)  \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \iff
+	\begin{cases}
+		(I - \frac{\tau}{2} A)\mathbf{S}_{j+1} = (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \\
+	& \text{Т.е. получаваме, че} \quad
+	\begin{cases}
+		\mathbf{S}_{j+1} = (I - \frac{\tau}{2} A)^{-1} (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases}
+\end{align*}
+\end{comment}
+\begin{comment}
+За да се освободим от неявните пресмятания, може да направим следното:
+\begin{align*}
+&\mathbf{Q}_{j + 1} = \mathbf{Q}_j + \frac{\tau}{2} \left( 2\mathbf{P}_j -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \right) \\
+&\mathbf{Q}_{j + 1} + \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_{j+1} = \mathbf{Q}_j - \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_j + \frac{\tau}{2} 2\mathbf{P}_j \\
+&\left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)\mathbf{Q}_{j + 1} = \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j, \quad A = \frac{\tau^2}{4} (M^0)^{-1} M^1 \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{\tau}{2}  (M^0)^{-1} M^1 \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -2 A \left(I + A \right)^{-1} \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
+&\mathbf{P}_{j + 1} = \left(I -2 A \left(I + A \right)^{-1}\right) \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j
+\end{align*}
+Ако въведем означанията:
+\begin{align*}
+&B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \\
+&E = C B, \quad F = -\frac{2}{\tau} A - \frac{2}{\tau} A E, \quad G = \tau C  
+\end{align*}
+Получаваме директната рекурентна зависимост:
+\begin{equation}
+	\begin{cases}
+      \mathbf{Q}_{j + 1} = E\mathbf{Q}_j + G\mathbf{P}_j \\
+      \mathbf{P}_{j + 1} = F\mathbf{Q}_j + D\mathbf{P}_j \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+    \iff
+    \begin{cases}
+      \mathbf{S}_{j + 1} = 
+      	\left(\begin{array}{c|c}
+			E & G \\ \hline
+			F & D 
+		\end{array}\right) \mathbf{S}_j \\
+      \mathbf{S}_0 = 0 \\
+    \end{cases}, \quad 
+    \mathbf{S}_j = 
+    	\left(\begin{array}{c}
+			\mathbf{Q}_j \\ \hline
+			\mathbf{P}_j
+		\end{array}\right)
+\end{equation}
+\end{comment}
+\end{large}
+\end{document}

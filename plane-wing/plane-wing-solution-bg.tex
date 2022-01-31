@@ -1,9 +1,9 @@
 % Meta
-\documentclass[12pt]{article}
+\documentclass[bulgarian, 12pt]{article}
 \usepackage[
 	a4paper, 
 	includeheadfoot, 
-	margin = 1.5cm]
+	margin = 1.5 cm]
 {geometry}
 
 % Hyperlinks
@@ -18,10 +18,14 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[bulgarian]{babel}
-\usepackage{csquotes}
 \usepackage{bm}
 % ISO-Math (only for XeLaTeX and LuaLaTex)
 %\usepackage[math-style=ISO]{unicode-math}
+
+% Citing
+% IMPORTANT! USE 'babel=true' to be able to use csquotes with a multitude of languages
+% By default you can use only ~10 languages
+\usepackage[babel=true]{csquotes}
 
 % Indent first line in paragraph
 \usepackage{indentfirst}
@@ -129,7 +133,7 @@ F(v) = \int\limits_{\Gamma_{in}} v \,\dd s
 	&M^1=\begin{pmatrix}
 	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
 	\vdots & \ddots & \vdots \\
-	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \,\dd\Omega \\
 	\end{pmatrix}, \quad
     \mathbf{b}=
     \begin{pmatrix}
@@ -147,5 +151,6 @@ $M^1$ е сметната като по лекции. В кода се възп�
 &= \norm{\mathbf{r}_i-\mathbf{r}_j}(1-\frac{1}{2}) =\frac{\norm{\mathbf{r}_i-\mathbf{r}_j}}{2} \\
 \end{align*}
 За получаването на $\int\limits_{\Gamma_{in}} \varphi_i \,\dd s$ остава само да съберем тези изрази за всички гранични отсечки, на които възела $i$ е край. Тъй като решението $\Phi$ е потенциал, то съответсващият му поток би бил $\pm \grad \Phi$ (в зависимост от кои източници следваме). Тук $-\grad \Phi$ изглежда повече приляга на задачата.
+
 \end{large}
 \end{document}
