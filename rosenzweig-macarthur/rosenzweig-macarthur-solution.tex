@@ -1,0 +1,293 @@
+% Meta
+\documentclass[bulgarian, 12pt]{article}
+\usepackage[
+	a4paper, 
+	includeheadfoot, 
+	margin = 1.5 cm]
+{geometry}
+
+% Hyperlinks
+\usepackage[
+	unicode=true, 
+	colorlinks=true, 
+	linkcolor=black, 
+	urlcolor=black]
+{hyperref}
+
+% Fonts
+% UTF-8 if you are not using XeLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{bm}
+% ISO-Math (only for XeLaTeX and LuaLaTex)
+%\usepackage[math-style=ISO]{unicode-math}
+
+% Citing
+% IMPORTANT! USE 'babel=true' to be able to use csquotes with a multitude of languages
+% By default you can use only ~10 languages
+\usepackage[babel=true]{csquotes}
+
+% Indent first line in paragraph
+\usepackage{indentfirst}
+
+% Place tags on the left
+\usepackage[leqno]{amsmath}
+
+% Better math
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{comment}
+\usepackage{mathptmx}
+\usepackage[makeroom]{cancel}
+
+% Create math pictures
+\usepackage{tikz}
+\usepackage{enumitem}
+
+% Better theorems
+\usepackage{amsthm}
+
+% Derivative notations
+\usepackage{physics}
+\usepackage{derivative}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Lapacian delta
+%\newcommand{\laplace}{\increment}
+\newcommand{\laplace}{∆}
+%\fontsize{16pt}{20pt}\selectfont
+% Bolded cyrilic text
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\rmdefault}{cmr}
+\renewcommand{\ttdefault}{cmt}
+
+% Roman numerals for sections
+\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+% Sectioning titles
+\newtheorem{definition}{Дефиниция}[section]
+\newtheorem{problem}{Задача}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{theorem*}{Теорема}
+\newtheorem{lemma}{Лема}
+\newtheorem*{solution*}{Решение}
+
+% Numbering of equations
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Space between lines in array for fractions
+\renewcommand{\arraystretch}{1.5}
+
+\title{Решение на стационарна задача със самолетно крило}
+
+\author{Калоян Стоилов}
+
+\begin{document}
+
+\maketitle
+
+\begin{large}
+\begin{equation}
+\tag{D}
+  \begin{cases}
+    \pdv{N}{t} - \Delta N - N (1 - \frac{N}{0.4}) + \frac{0.5 N P}{0.5 + N} = 0, \quad \text{в $\Omega \times J
+$} \\
+    \pdv{P}{t} - \Delta P - \frac{0.5 N P}{0.5 + N} + 0.2 P = 0, \quad \text{в $\Omega \times J
+$} \\
+    \left(n \cdot \grad N \right) = \left(n \cdot \grad P \right)  = 0, \text{в $\partial \Omega \times J$} \\
+    N(x,y,0) = 0.3 ,\quad P(x,y,0) = 0.5, \text{в $[0.8, 1]^2$} \\
+    N(x,y,0) = P(x,y,0) = 0, \text{в $\partial \Omega$ при $t=0$}
+  \end{cases}
+\end{equation}
+
+За да достигнем до вариационна формулировка, нека разгледаме за фиксиран момент $t \in J$ и умножим скаларно двете страни съответно по функции $v$ и $w$.
+Ще приложим формулите за интегриране по части:
+%\iint\limits_{\Omega} v \pdv{N}{t} \,\dd\Omega - \iint\limits_{\Omega} v  \Delta N \,\dd\Omega -\iint\limits_{\Omega} v N (1 - \frac{N}{0.4}) \,\dd\Omega + \iint\limits_{\Omega}  v \frac{0.5 N P}{0.5 + N} \,\dd\Omega = 0 \\
+
+\begin{align*}
+  &\iint\limits_{\Omega} v \left( \pdv{N}{t} - \Delta N - N (1 - \frac{N}{0.4}) + \frac{0.5 N P}{0.5 + N} \right) \,\dd\Omega = 0 \\
+  &\iint\limits_{\Omega} v \pdv{N}{t} \,\dd\Omega = \dv{t} \iint\limits_{\Omega} v N \,\dd\Omega \\
+  &\iint\limits_{\Omega} v (- \Delta N) \,\dd\Omega = \iint\limits_{\Omega} \grad v \cdot \grad N \,\dd\Omega - \int\limits_{\partial\Omega} v \cancelto{0}{\left(n \cdot \grad N \right)} \,\dd s \\
+  &\iint\limits_{\Omega} w \left( \pdv{P}{t} - \Delta P - \frac{0.5 N P}{0.5 + N} + 0.2 P \right) \,\dd\Omega = 0 \\
+  &\iint\limits_{\Omega} w \pdv{P}{t} \,\dd\Omega = \dv{t} \iint\limits_{\Omega} w P \,\dd\Omega \\
+  &\iint\limits_{\Omega} w (- \Delta P) \,\dd\Omega = \iint\limits_{\Omega} \grad w \cdot \grad P \,\dd\Omega - \int\limits_{\partial\Omega} w \cancelto{0}{\left(n \cdot \grad P \right)} \,\dd s
+\end{align*}
+Имаме естествени гранични условия, откъдето няма условия над тестовите фунцкии: 
+\[v, w \in H^1(\Omega)\]
+Така достигнахме до вариационната задача:
+\begin{align*}
+\tag{V}
+&\text{За всяко $t \in J$ търсим $N, P \in H^1(\Omega)$, такива че: \enspace} \\
+&\forall v \in H^1(\Omega) \left(\dv{t} \iint\limits_{\Omega} v N \,\dd\Omega - \iint\limits_{\Omega} v N \,\dd\Omega + a(N, v) + b(N,v) + c(N,P,v) = 0 \right) \\
+&\forall w \in H^1(\Omega) \left(\dv{t} \iint\limits_{\Omega} w P \,\dd\Omega + 0.2 \iint\limits_{\Omega} w P \,\dd\Omega + a(P, w) - c(N,P,w) = 0 \right) \\
+&a(u, v) = \iint\limits_{\Omega} \grad v \cdot \grad u \,\dd\Omega ,\quad b(N, v) = \iint\limits_{\Omega} v \frac{N^2}{0.4} \,\dd\Omega ,\quad c(N, P, v) = \iint\limits_{\Omega} v \frac{0.5 N P}{0.5 + N} \,\dd\Omega
+\end{align*}
+
+Задачата на Риц-Гальоркин е: 
+\begin{align*}
+\tag{R-G}
+&\text{За всяко $t \in J$ търсим $N_h, P_h \in H^1_h(\mathcal{K})$, такава че: \enspace} \\
+&\forall v \in H^1_h(\mathcal{K} \left(\dv{t} \iint\limits_{\Omega} v N_h \,\dd\Omega - \iint\limits_{\Omega} v N_h \,\dd\Omega + a(N_h, v) + b(N_h,v) + c(N_h,P_h,v) = 0 \right) \\
+&\forall w \in H^1_h(\mathcal{K}) \left(\dv{t} \iint\limits_{\Omega} w P_h \,\dd\Omega + 0.2 \iint\limits_{\Omega} w P_h \,\dd\Omega + a(P_h, w) - c(N_h,P_h,w) = 0 \right)
+\end{align*}
+
+Тук $\mathcal{K}$ е триангулацията. 
+Както обикновено, нека базисните функции бележим $\varphi_i$. 
+Тъй като тестовите функции са от едно пространство, то може да работим с един набор от базисни функции.
+Така съответно и матрици на маса/коравина ще бъдат същите и може да се преизползват.
+
+Нека с $\mathbf{q}, \mathbf{p}$ бележим съответно векторите от приближените стойности на $N$ и $P$ във възлите в момент $t$.
+След стандартните разписвания имаме: 
+\begin{align*}
+  &\begin{cases}
+	  M^0\dot{\mathbf{q}} + M^1\mathbf{q} + 2.5 B\mathbf{q} = 0 \\
+    M^0\dot{\mathbf{p}} + M^1\mathbf{p} + 0.2 M^0\mathbf{p} + = 0 \\
+	\end{cases} \\
+  &M^0=\begin{pmatrix}
+	\iint\limits_{\Omega} \varphi_1 \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \varphi_n \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n \,\dd\Omega \\
+	\end{pmatrix},\,
+  M^1=\begin{pmatrix}
+	\iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_1 \cdot \grad \varphi_n \,\dd\Omega \\
+	\vdots & \ddots & \vdots \\
+	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \,\dd\Omega \\
+	\end{pmatrix}\\
+  &B=\begin{pmatrix}
+    \iint\limits_{\Omega} \varphi_1 \varphi_1^2 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n^2 \,\dd\Omega \\
+    \vdots & \ddots & \vdots \\
+    \iint\limits_{\Omega} \varphi_n \varphi_1^2 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n^2 \,\dd\Omega \\
+    \end{pmatrix}  
+\end{align*}
+
+$M^0, M^1$ могат да се сметнат като по лекции. За $B$ аналогично може да използваме локални матрици.
+В кода се възползваме от факта, че при линейна интерполация градиента на фунцкиите на формата $\grad \boldsymbol{\Psi}$ е константен. 
+Тогава директно може да се пресметне интеграла за локалните матрици на коравина, който е лицето на стандартния триъгълник.
+Интегралът за локалните матрици на масата също е константен.
+Нормализираната система изглежда така:
+\begin{comment}
+	\begin{cases}
+		\dot{\mathbf{s}} = 
+			\left(\begin{array}{c|c}
+			O & I \\ \hline
+			-(M^0)^{-1} M^1 & O
+		\end{array}\right) \mathbf{s} = 
+		A \mathbf{s}\\
+		\mathbf{s}(0) = 0 \\
+	\end{cases},
+\end{comment}
+\begin{equation*}
+    \begin{cases}
+      \dot {\mathbf{q}} = {\mathbf{p}} \\
+      (M^0) \dot {\mathbf{p}} = -M^1 {\mathbf{q}} \\
+      \mathbf{q}(0) = \mathbf{p}(0) = 0 \\
+    \end{cases}
+	\iff
+	\begin{cases}
+		\left(\begin{array}{c|c}
+			I & O \\ \hline
+			O & M^0
+		\end{array}\right)\dot{\mathbf{s}} = 
+			\left(\begin{array}{c|c}
+			O & I \\ \hline
+			-M^1 & O
+		\end{array}\right) \mathbf{s} \\
+		\mathbf{s}(0) = 0 \\
+	\end{cases}\iff
+	\begin{cases}
+		L\dot{\mathbf{s}} = 
+		R \mathbf{s} \\
+		\mathbf{s}(0) = 0 \\
+	\end{cases}\, 
+	\mathbf{s} = 
+		\left(\begin{array}{c}
+			\mathbf{Q} \\ \hline
+			\mathbf{P}
+		\end{array}\right)
+\end{equation*} 
+Тук с $I$ означихме единичната, а с $O$ нулевата матрица. За решаване с подобрения метод на Ойлер, то:
+\begin{align*}
+	&\begin{cases}
+		L \left(\mathbf{S}_{j+1} - \mathbf{S}_{j}\right) = 
+		\frac{\tau}{2} R \left(\mathbf{S}_{j+1} + \mathbf{S}_{j}\right)  \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \iff
+	\begin{cases}
+		(L - \frac{\tau}{2} R)\mathbf{S}_{j+1} = (L + \frac{\tau}{2} R) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases}
+\end{align*}
+
+Но през цялото време си затворихме очите, че условието на Дирихле не е хомогенно.
+Затова тук на всяка стъпка, след решаване на системата, ще задаваме компонентите на $\mathbf{Q}_{j + 1}$, съответстващи на възлите по границата $\Gamma_{D}$ да са $0.1\sin(8\pi\, t_{j+1})$. 
+След като сме приключили с пресмятането на всички стъпки, искаме да вземем само първата половина на $\mathbf{S}$, т.к. тя отговаря за $\mathbf{Q}$.
+\begin{comment}
+    \begin{cases}
+      \mathbf{Q}_{j + 1} - \mathbf{Q}_j = \frac{\tau}{2} \left( \mathbf{P}_{j + 1} + \mathbf{P}_j \right) \\
+      \mathbf{P}_{j + 1} - \mathbf{P}_j = -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+\end{comment}
+\begin{comment}
+\begin{align*}
+	&\begin{cases}
+		\mathbf{S}_{j+1} - \mathbf{S}_{j} = 
+		\frac{\tau}{2} A \left(\mathbf{S}_{j+1} + \mathbf{S}_{j}\right)  \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \iff
+	\begin{cases}
+		(I - \frac{\tau}{2} A)\mathbf{S}_{j+1} = (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases} \\
+	& \text{Т.е. получаваме, че} \quad
+	\begin{cases}
+		\mathbf{S}_{j+1} = (I - \frac{\tau}{2} A)^{-1} (I + \frac{\tau}{2} A) \mathbf{S}_{j} \\
+		\mathbf{S}_{0} = 0 \\
+	\end{cases}
+\end{align*}
+\end{comment}
+\begin{comment}
+За да се освободим от неявните пресмятания, може да направим следното:
+\begin{align*}
+&\mathbf{Q}_{j + 1} = \mathbf{Q}_j + \frac{\tau}{2} \left( 2\mathbf{P}_j -\frac{\tau}{2} (M^0)^{-1} M^1 \left( \mathbf{Q}_{j + 1} + \mathbf{Q}_j \right) \right) \\
+&\mathbf{Q}_{j + 1} + \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_{j+1} = \mathbf{Q}_j - \frac{\tau^2}{4} (M^0)^{-1} M^1 \mathbf{Q}_j + \frac{\tau}{2} 2\mathbf{P}_j \\
+&\left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)\mathbf{Q}_{j + 1} = \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \left(I - \frac{\tau^2}{4} (M^0)^{-1} M^1 \right) \mathbf{Q}_j + \tau \left(I + \frac{\tau^2}{4} (M^0)^{-1} M^1 \right)^{-1} \mathbf{P}_j \\
+&\mathbf{Q}_{j + 1} = \left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j, \quad A = \frac{\tau^2}{4} (M^0)^{-1} M^1 \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{\tau}{2}  (M^0)^{-1} M^1 \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -\frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) \mathbf{Q}_j + \tau \left(I + A \right)^{-1} \mathbf{P}_j + \mathbf{Q}_j \right) \\
+&\mathbf{P}_{j + 1} = \mathbf{P}_j -2 A \left(I + A \right)^{-1} \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j \\
+&\mathbf{P}_{j + 1} = \left(I -2 A \left(I + A \right)^{-1}\right) \mathbf{P}_j - \frac{2}{\tau} A \left(\left(I + A \right)^{-1} \left(I - A \right) + I \right) \mathbf{Q}_j
+\end{align*}
+Ако въведем означанията:
+\begin{align*}
+&B = I - A, \quad C = (I + A)^{-1}, \quad D = I - 2 A C, \\
+&E = C B, \quad F = -\frac{2}{\tau} A - \frac{2}{\tau} A E, \quad G = \tau C  
+\end{align*}
+Получаваме директната рекурентна зависимост:
+\begin{equation}
+	\begin{cases}
+      \mathbf{Q}_{j + 1} = E\mathbf{Q}_j + G\mathbf{P}_j \\
+      \mathbf{P}_{j + 1} = F\mathbf{Q}_j + D\mathbf{P}_j \\
+      \mathbf{Q}_0 = \mathbf{P}_0 = 0 \\
+    \end{cases}
+    \iff
+    \begin{cases}
+      \mathbf{S}_{j + 1} = 
+      	\left(\begin{array}{c|c}
+			E & G \\ \hline
+			F & D 
+		\end{array}\right) \mathbf{S}_j \\
+      \mathbf{S}_0 = 0 \\
+    \end{cases}, \quad 
+    \mathbf{S}_j = 
+    	\left(\begin{array}{c}
+			\mathbf{Q}_j \\ \hline
+			\mathbf{P}_j
+		\end{array}\right)
+\end{equation}
+\end{comment}
+\end{large}
+\end{document}
