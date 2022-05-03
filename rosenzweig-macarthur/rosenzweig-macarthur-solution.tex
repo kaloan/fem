@@ -142,8 +142,8 @@ $} \\
 След стандартните разписвания имаме: 
 \begin{align*}
   &\begin{cases}
-	  M^0\dot{\mathbf{q}} + M^1\mathbf{q} + 2.5 B\mathbf{q} - = 0 \\
-    M^0\dot{\mathbf{p}} + M^1\mathbf{p} + 0.2 M^0\mathbf{p} + = 0 \\
+	  M^0\dot{\mathbf{q}} - M^0\mathbf{q} + M^1\mathbf{q} + \mathbf{b}(\mathbf{q}) + \mathbf{c}(\mathbf{q},\mathbf{p}) = 0 \\
+    M^0\dot{\mathbf{p}} + 0.2 M^0\mathbf{p} + M^1\mathbf{p} - \mathbf{c}(\mathbf{q},\mathbf{p}) = 0 \\
 	\end{cases} \\
   &M^0=\begin{pmatrix}
 	\iint\limits_{\Omega} \varphi_1 \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n \,\dd\Omega \\
@@ -155,13 +155,52 @@ $} \\
 	\vdots & \ddots & \vdots \\
 	\iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_1 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \grad \varphi_n \cdot \grad \varphi_n \,\dd\Omega \\
 	\end{pmatrix}\\
-  &B=\begin{pmatrix}
-    \iint\limits_{\Omega} \varphi_1 \varphi_1^2 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_1 \varphi_n^2 \,\dd\Omega \\
-    \vdots & \ddots & \vdots \\
-    \iint\limits_{\Omega} \varphi_n \varphi_1^2 \,\dd\Omega & \hdots & \iint\limits_{\Omega} \varphi_n \varphi_n^2 \,\dd\Omega \\
-    \end{pmatrix}  
+  &\mathbf{b}(\mathbf{q}) = 2.5 \iint\limits_{\Omega} \mathbf{\varphi} (\mathbf{\varphi} \cdot \mathbf{q})^2\,\dd\Omega ,\quad
+  \mathbf{c}(\mathbf{q},\mathbf{p}) = 0.5 \iint\limits_{\Omega} \mathbf{\varphi} \frac{(\mathbf{\varphi} \cdot \mathbf{q})(\mathbf{\varphi} \cdot \mathbf{p})}{0.5 + \mathbf{\varphi} \cdot \mathbf{q}} \,\dd\Omega
 \end{align*}
+$M^0, M^1$ могат да се сметнат като по лекции. 
 
-$M^0, M^1$ могат да се сметнат като по лекции. За $B$ аналогично може да използваме локални матрици.
+За $\mathbf{b}$ може да забележим следното:
+\begin{align*}
+  &b_i(\mathbf{q}) = 
+  2.5 \iint\limits_{\Omega} \mathbf{\varphi} \frac{(\mathbf{\varphi} \cdot \mathbf{q})^2}{0.4} \,\dd\Omega = 
+  \sum_{\tau \subset \mathrm{supp} \,\varphi_i } 2.5 \iint\limits_{\tau} \varphi_i (\mathbf{\varphi} \cdot \mathbf{q})^2 \,\dd\tau =\\
+  &2.5 \sum_{\tau \subset \mathrm{supp} \,\varphi_i } \sum_{j, k} q_j q_k \iint\limits_{\tau} \varphi_i \varphi_j \varphi_k \,\dd\tau
+\end{align*}
+Където последната сума е по индексите $j, k$ на базисните функции за елемента $\tau$. 
+Вътрешният интеграл може да се сведе до интеграл по референтната област с фунцкиите на формата.
+Може да пресметнем (приближили) съответните интеграли и да ги запазим в един кубичен масив с размер по всеки индекс броя на функции на формата.
+Така при обхождане на всеки елемент може да добавяме съответните суми по различните индекси на $\mathbf{b}$.
+За $\mathbf{c}$ може да повторим само първата стъпка изцяло. 
+За втората стъпка може да получим само "по-добре" разписана двойна сума, т.к. в знаменателя ще получим сума, зависеща от $\mathbf{q}$ и няма да използваме вече изчислени интеграли по фунцкии на формата.
+
+Нека сега групираме $\mathbf{q}$ и $\mathbf{p}$ в общ вектор $\mathbf{s}$. Да означим:  
+\begin{align*}
+  &\tilde{M^0}=\left(\begin{array}{c|c}
+    M^0 & O \\ \hline
+    O & M^0
+  \end{array}\right),\quad
+  \tilde{M^1}=\left(\begin{array}{c|c}
+    M^1 & O \\ \hline
+    O & M^1
+  \end{array}\right),\quad
+  R=\left(\begin{array}{c|c}
+    -M^0 & O \\ \hline
+    O & 0.2 M^0
+  \end{array}\right),\quad \\
+  &\mathbf{f}(\mathbf{s}) = \left(\begin{array}{c}
+    \tilde{\mathbf{b}}(\mathbf{s}) \\ \hline
+    \mathbf{c}(\mathbf{s})
+  \end{array}\right),\quad \tilde{\mathbf{b}}(s_1, \dots, s_n, s_{n+1}, \dots, s_{2 n}) = \mathbf{b}(s_1, \dots, s_n)
+\end{align*}
+Достигаме до следната система ОДУ от първи ред:
+\begin{align*}
+  \tilde{M^0}\dot{\mathbf{s}} = -R \mathbf{s} -\tilde{M^1} \mathbf{s} -\mathbf{f}(\mathbf{s})
+\end{align*}
+Дискретизираме по времето и използваме неявен метод на Ойлер. Тогава трябва да решим системата:
+\begin{align*}
+  &\tilde{M^0}(\mathbf{S}_{j+1} - \mathbf{S}_j) = -R \mathbf{S}_{j+1} -\tilde{M^1} \mathbf{S}_{j+1} -\mathbf{f}(\mathbf{S}_{j+1}) \\
+  &(\tilde{M^0}+\tilde{M^1}+R)\mathbf{S}_{j+1} + \mathbf{f}(\mathbf{S}_{j+1}) - \tilde{M^0}\mathbf{S}_j = \mathbf{0}
+\end{align*}
 \end{large}
 \end{document}
